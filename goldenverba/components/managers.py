@@ -16,6 +16,7 @@ from goldenverba.components.reader.BasicReader import BasicReader
 from goldenverba.components.reader.GitReader import GitHubReader
 from goldenverba.components.reader.GitLabReader import GitLabReader
 from goldenverba.components.reader.UnstructuredAPI import UnstructuredReader
+from goldenverba.components.reader.MultiModalReader import MultiModalReader
 
 from goldenverba.components.chunking.TokenChunker import TokenChunker
 
@@ -26,6 +27,7 @@ from goldenverba.components.embedding.GoogleEmbedder import GoogleEmbedder
 from goldenverba.components.embedding.OllamaEmbedder import OllamaEmbedder
 from goldenverba.components.embedding.AllMPNetEmbedder import AllMPNetEmbedder
 from goldenverba.components.embedding.MixedbreadEmbedder import MixedbreadEmbedder
+from goldenverba.components.embedding.ImageBindEmbedder import ImageBindEmbedder
 
 from goldenverba.components.retriever.WindowRetriever import WindowRetriever
 
@@ -47,12 +49,13 @@ except Exception:
 class ReaderManager:
     def __init__(self):
         self.readers: dict[str, Reader] = {
-            "BasicReader": BasicReader(),
-            "GitHubReader": GitHubReader(),
-            "GitLabReader": GitLabReader(),
-            "UnstructuredAPI": UnstructuredReader(),
+            #"BasicReader": BasicReader(),
+            #"GitHubReader": GitHubReader(),
+            #"GitLabReader": GitLabReader(),
+            #"UnstructuredAPI": UnstructuredReader(),
+            "MultiModalReader": MultiModalReader(),
         }
-        self.selected_reader: str = "BasicReader"
+        self.selected_reader: str = "MultiModalReader"#"BasicReader"
 
     def load(
         self, fileData: list[FileData], textValues: list[str], logging: list[dict]
@@ -169,15 +172,16 @@ class ChunkerManager:
 class EmbeddingManager:
     def __init__(self):
         self.embedders: dict[str, Embedder] = {
-            "GoogleEmbedder": GoogleEmbedder(),
-            "MiniLMEmbedder": MiniLMEmbedder(),
-            "AllMPNetEmbedder": AllMPNetEmbedder(),
-            "MixedbreadEmbedder": MixedbreadEmbedder(),
-            "ADAEmbedder": ADAEmbedder(),
-            "CohereEmbedder": CohereEmbedder(),
-            "OllamaEmbedder": OllamaEmbedder(),
+            "ImageBindEmbedder": ImageBindEmbedder(),
+            #"GoogleEmbedder": GoogleEmbedder(),
+            #"MiniLMEmbedder": MiniLMEmbedder(),
+            #"AllMPNetEmbedder": AllMPNetEmbedder(),
+            #"MixedbreadEmbedder": MixedbreadEmbedder(),
+            #"ADAEmbedder": ADAEmbedder(),
+            #"CohereEmbedder": CohereEmbedder(),
+            #"OllamaEmbedder": OllamaEmbedder(),
         }
-        self.selected_embedder: str = "ADAEmbedder"
+        self.selected_embedder: str = "ImageBindEmbedder"#"ADAEmbedder"
 
 
     def embed(
